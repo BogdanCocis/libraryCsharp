@@ -1,0 +1,71 @@
+<mat-card class="add">
+  <mat-card-header>
+    <mat-card-title>Add New Book</mat-card-title>
+    <mat-card-subtitle>{{addMsg}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="addBookForm">
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Book Title</mat-label>
+        <input matInput formControlName="title">
+        <mat-error *ngIf="this.Title.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="this.Title.hasError('whitespace')">Cannot be empty or just spaces</mat-error>
+        <mat-error *ngIf="this.Title.hasError('invalidTitle')">Invalid title: cannot start with a special character or space, and cannot contain consecutive spaces.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Book Category</mat-label>
+        <input matInput formControlName="category">
+        <mat-error *ngIf="this.Category.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="this.Category.hasError('whitespace')">Cannot be empty or just spaces</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Book Sub-Category</mat-label>
+        <input matInput formControlName="subcategory">
+        <mat-error *ngIf="this.Subcategory.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="this.Subcategory.hasError('whitespace')">Cannot be empty or just spaces</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Book Author</mat-label>
+        <input matInput formControlName="author">
+        <mat-error *ngIf="this.Author.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="this.Author.hasError('whitespace')">Cannot be empty or just spaces</mat-error>
+        <mat-error *ngIf="this.Author.hasError('invalidName')">Invalid author name: must start with a letter, and can contain letters, hyphens, and single spaces between words.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" type="number">
+        <mat-error *ngIf="this.Price.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="this.Price.hasError('min') || this.Price.hasError('max')">
+          Price must be between 0 and 50 $.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="accent" [disabled]="this.addBookForm.invalid"
+              (click)="insertBook()">ADD</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="delete">
+  <mat-card-header>
+    <mat-card-title>Delete Existing Book</mat-card-title>
+    <mat-card-subtitle>{{delMsg}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Book Id</mat-label>
+        <input matInput [formControl]="deleteBookForm">
+        <mat-error *ngIf="this.deleteBookForm.invalid">Required</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button color="warn" [disabled]="this.deleteBookForm.invalid"
+            (click)="deleteBook()">Delete</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,34 @@
+<mat-card class="category">
+  <mat-card-header>
+    <mat-card-title>Add New Category</mat-card-title>
+    <mat-card-subtitle>{{msg}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="categoryForm">
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Category</mat-label>
+        <input matInput formControlName="category">
+        <mat-error *ngIf="this.Category.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="this.Category.hasError('whitespace')">Cannot be empty or just spaces</mat-error>
+        <mat-error *ngIf="this.Category.hasError('numbersOnly')">Cannot contain only numbers or start with a number</mat-error>
+        <mat-error *ngIf="this.Category.hasError('specialCharactersOnly')">Cannot contain only special characters</mat-error>
+        <mat-error *ngIf="this.Category.hasError('specialCharacterOrSpaceAtStart')">Cannot start with a special character or space</mat-error>
+        <mat-error *ngIf="this.Category.hasError('invalidFormat')">Must be in the format "string", "string-string" or "string string"</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Subcategory</mat-label>
+        <input matInput formControlName="subcategory">
+        <mat-error *ngIf="this.Subcategory.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="this.Subcategory.hasError('whitespace')">Cannot be empty or just spaces</mat-error>
+        <mat-error *ngIf="this.Subcategory.hasError('numbersOnly')">Cannot contain only numbers or start with a number</mat-error>
+        <mat-error *ngIf="this.Subcategory.hasError('specialCharactersOnly')">Cannot contain only special characters</mat-error>
+        <mat-error *ngIf="this.Subcategory.hasError('specialCharacterOrSpaceAtStart')">Cannot start with a special character or space</mat-error>
+        <mat-error *ngIf="this.Subcategory.hasError('invalidFormat')">Must be in the format "string", "string-string" or "string string"</mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="accent" [disabled]="this.categoryForm.invalid"
+              (click)="addNewCategory()">ADD</button>
+    </form>
+  </mat-card-content>
+</mat-card>
